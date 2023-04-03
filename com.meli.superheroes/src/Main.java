@@ -1,5 +1,13 @@
+
+import model.SuperHeroe;
+
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+
+        SuperHeroe aquaman = new SuperHeroe("Aquaman");
+        aquaman.setDescripcion("Rey de los oceanos");
+        aquaman.setCapa(true);
+
+        System.out.println(aquaman.toString());
     }
 }
