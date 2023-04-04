@@ -1,58 +1,50 @@
 package model;
 
 public class SuperHeroe {
-    // Atributos
-    private String nombre;
-    private String descripcion = "";
-    private boolean capa = false;
+    private String name;
+    private String description;
+    private boolean capa;
 
-    //Metodo contructor
-
-    public SuperHeroe(String nombre) {
-
-        this.nombre = nombre;
+    public SuperHeroe(String name) {
+        this.name = name;
+        this.description ="";
+        this.capa =false;
     }
 
-    //Metodos personalizados
-
-    @Override
-    public String toString() {
-
-        return "(Nombre): " + nombre + ", Descripcion: " + descripcion + ", Capa: " + capa;
+    public String getName() {
+        return name;
     }
 
-
-    //Metodos getter y setters
-    public String getNombre() {
-
-        return nombre;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setNombre(String nombre) {
-
-        this.nombre = nombre;
+    public String getDescription() {
+        return description;
     }
 
-    public String getDescripcion() {
-
-        return descripcion;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public void setDescripcion(String descripcion) {
-
-        this.descripcion = descripcion;
-    }
-
-    public boolean getCapa() {
-
+    public boolean isCapa() {
         return capa;
     }
 
-    public void setCapa(Boolean capa) {
-
+    public void setCapa(boolean capa) {
         this.capa = capa;
     }
 
-
+    @Override
+    public String toString() {
+        return "SuperHeroes{" +
+                "name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", capa=" + capa +
+                '}';
+    }
 }
+
+
+
 
