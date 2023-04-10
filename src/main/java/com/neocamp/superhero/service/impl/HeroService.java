@@ -21,10 +21,16 @@ public class HeroService implements IHeroService {
     }
 
     @Override
-    public SuperHero updateHero(SuperHero Hero) {
-        return repo.save(Hero);
-    }
+    public SuperHero updateHero(SuperHero Hero, Long idHero) {
+        Optional<SuperHero> heros = repo.findById(idHero);
+        SuperHero heroe = heros.get();
+        heroe.setName(Hero.getName());
+        heroe.setDescription(Hero.getDescription());
+        heroe.setCapa(Hero.isCapa());
+        heroe.setCity(Hero.getCity());
 
+        return repo.save(heroe);
+    }
     @Override
     public List<SuperHero> listHeros() {
         return (List<SuperHero>) repo.findAll();

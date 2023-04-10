@@ -44,4 +44,10 @@ public class HeroController {
         return  ResponseEntity.ok(Boolean.TRUE);
     }
 
+    @PutMapping("/update/{idHero}")
+    public ResponseEntity<Object> updateHero(@RequestBody SuperHero hero,@PathVariable("idHero") Long idHero){
+        iservice.updateHero(hero,idHero);
+        return ResponseEntity.ok(Boolean.TRUE);
+    }
+
 }

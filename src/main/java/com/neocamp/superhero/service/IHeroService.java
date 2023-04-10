@@ -9,7 +9,7 @@ public interface IHeroService {
 
     SuperHero addHero(SuperHero Hero);
 
-    SuperHero updateHero(SuperHero Hero);
+    SuperHero updateHero(SuperHero Hero, Long idHero);
 
     List<SuperHero> listHeros();
 
