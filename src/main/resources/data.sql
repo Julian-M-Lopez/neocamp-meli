@@ -12,4 +12,6 @@ CREATE TABLE SUPERHERO (
 INSERT INTO SUPERHERO (name, description,capa,city) VALUES
   ('Spiderman', ' araña', false, 'new york'),
   ('Superman', ' es fuerte ', true, 'new york'),
-  ('lintena verde', ' es verde ', true, 'los angeles');
+  ('lintena verde', ' es verde ', true, 'los angeles'),
+  ('mujer mariavilla', ' es mujer ', true, 'los angeles');
+
