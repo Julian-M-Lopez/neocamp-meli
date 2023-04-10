@@ -20,9 +20,9 @@ public class HeroController {
      private IHeroService iservice;
 
 
-    @GetMapping("/")
+    @PostMapping("/")
     public ResponseEntity<SuperHero> addHero(@RequestBody SuperHero hero){
-        return new ResponseEntity<>(hero, HttpStatus.CREATED);
+        return  ResponseEntity.ok(iservice.addHero(hero));
     }
 
     @GetMapping("/{idHero}")
