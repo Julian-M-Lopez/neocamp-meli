@@ -36,9 +36,16 @@ public class HeroService implements IHeroService {
         return (List<SuperHero>) repo.findAll();
     }
 
+
+
     @Override
     public Optional<SuperHero> getHero(Long idHero) {
         return repo.findById(idHero);
+    }
+
+    @Override
+    public List<SuperHero> getNameHero(String name) {
+        return repo.findByName(name);
     }
 
     @Override

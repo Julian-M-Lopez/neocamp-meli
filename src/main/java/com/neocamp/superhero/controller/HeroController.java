@@ -32,6 +32,10 @@ public class HeroController {
         Optional<SuperHero> hero = iservice.getHero(idHero);
         return ResponseEntity.ok(hero.get());
     }
+    @GetMapping("/name/{name}")
+    public ResponseEntity<List<SuperHero>>getNameHero(@PathVariable("name") String name){
+        return ResponseEntity.ok(iservice.getNameHero(name));
+    }
 
     @GetMapping("/all")
     public ResponseEntity<List<SuperHero>> getAllHero (){

@@ -15,6 +15,8 @@ public interface IHeroService {
 
     Optional<SuperHero> getHero(Long idHero);
 
+    List<SuperHero> getNameHero (String name);
+
     void deleteHero(Long idHero);
 
 
