@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Controller
@@ -35,6 +36,12 @@ public class HeroController {
     @GetMapping("/all")
     public ResponseEntity<List<SuperHero>> getAllHero (){
         return ResponseEntity.ok(iservice.listHeros());
+    }
+
+    @DeleteMapping("/delete/{idHero}")
+    public ResponseEntity<Object> deleteHero(@PathVariable("idHero") Long idHero){
+        iservice.deleteHero(idHero);
+        return  ResponseEntity.ok(Boolean.TRUE);
     }
 
 }
