@@ -27,7 +27,7 @@ public class HeroService implements IHeroService {
 
     @Override
     public List<SuperHero> listHeros() {
-        return null;
+        return (List<SuperHero>) repo.findAll();
     }
 
     @Override

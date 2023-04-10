@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -20,7 +21,7 @@ public class HeroController {
      private IHeroService iservice;
 
 
-    @PostMapping("/")
+    @PostMapping("/add")
     public ResponseEntity<SuperHero> addHero(@RequestBody SuperHero hero){
         return  ResponseEntity.ok(iservice.addHero(hero));
     }
@@ -29,6 +30,11 @@ public class HeroController {
     public ResponseEntity<SuperHero>getHero(@PathVariable("idHero") Long idHero){
         Optional<SuperHero> hero = iservice.getHero(idHero);
         return ResponseEntity.ok(hero.get());
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<SuperHero>> getAllHero (){
+        return ResponseEntity.ok(iservice.listHeros());
     }
 
 }
