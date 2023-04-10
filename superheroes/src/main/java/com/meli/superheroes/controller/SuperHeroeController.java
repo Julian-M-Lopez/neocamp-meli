@@ -1,6 +1,7 @@
 package com.meli.superheroes.controller;
 
 import com.meli.superheroes.model.SuperHeroe;
+import com.meli.superheroes.repository.SuperHeroeRepository;
 import com.meli.superheroes.service.SuperHeroeService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,17 +16,17 @@ import java.util.List;
 @AllArgsConstructor
 public class SuperHeroeController {
 
-    private final SuperHeroeService superHeroeService;
+    private final SuperHeroeService superHeroeService;;
 
     @GetMapping
     public List<SuperHeroe> obtenerSuperHeroes() {
 
-        return superHeroeService.obtenerSuperHeroes();
+        return superHeroeService.getAllSuperHeroes();
     }
 
     @GetMapping("/{nombre}")
     public String obtenerSuperHeroe(@PathVariable String nombre) {
-        SuperHeroe superHeroe = superHeroeService.obtenerSuperHeroePorNombre(nombre);
+        SuperHeroe superHeroe = superHeroeService.getSuperHeroeByNombre(nombre);
         if (superHeroe != null) {
             return "El superhéroe " + superHeroe.getNombre() + " es " + superHeroe.getDescripcion();
         } else {

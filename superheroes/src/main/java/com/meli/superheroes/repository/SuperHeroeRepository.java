@@ -4,9 +4,11 @@ import com.meli.superheroes.model.SuperHeroe;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
-public interface SuperHeroeRepository extends JpaRepository<SuperHeroe,String>{
-
-
+public interface SuperHeroeRepository extends JpaRepository<SuperHeroe,Long>{
+    SuperHeroe findByNombre(String nombre);
+    Optional<SuperHeroe> findById(Long id);
 
 }
