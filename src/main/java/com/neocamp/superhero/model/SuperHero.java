@@ -7,7 +7,7 @@ import javax.naming.Name;
 import java.util.Objects;
 
 @Entity
-@Table(name = "superhero")
+@Table(name = "SUPERHERO")
 public class SuperHero {
 
     @Id
