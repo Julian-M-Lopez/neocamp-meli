@@ -1,11 +1,22 @@
 package com.meli.superheroes.model;
 
+import lombok.*;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
+
 public class SuperHeroe {
     // Atributos
     private String nombre;
     private String descripcion = "";
     private boolean capa = false;
+}
 
+    //Codigo omitiod por Lombok
+ /*
     // Metodos constructor
     public SuperHeroe(String nombre, String descripcion) {
         this.nombre = nombre;
@@ -43,3 +54,4 @@ public class SuperHeroe {
         this.capa = capa;
     }
 }
+*/

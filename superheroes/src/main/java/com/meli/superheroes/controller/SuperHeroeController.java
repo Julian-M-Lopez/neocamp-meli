@@ -2,7 +2,7 @@ package com.meli.superheroes.controller;
 
 import com.meli.superheroes.model.SuperHeroe;
 import com.meli.superheroes.service.SuperHeroeService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,10 +12,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/superheroes")
+@AllArgsConstructor
 public class SuperHeroeController {
 
-    @Autowired
-    private SuperHeroeService superHeroeService;
+    private final SuperHeroeService superHeroeService;
 
     @GetMapping
     public List<SuperHeroe> obtenerSuperHeroes() {

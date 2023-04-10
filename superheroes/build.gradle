@@ -13,8 +13,12 @@ repositories {
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	implementation 'org.springframework.boot:spring-boot-starter-web:3.0.4'
+	implementation 'org.springframework.data:spring-data-jpa:3.0.4'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test:3.0.4'
+	testImplementation 'com.h2database:h2:2.1.214'
+	compileOnly 'org.projectlombok:lombok:1.18.20'
+	annotationProcessor 'org.projectlombok:lombok:1.18.20'
 }
 
 tasks.named('test') {
