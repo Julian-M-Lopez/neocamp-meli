@@ -15,9 +15,13 @@ public class SuperHero {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+
     private String name;
+
     private String city;
+
     private String description;
+
     private boolean capa;
 
 
