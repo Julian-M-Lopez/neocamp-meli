@@ -54,4 +54,12 @@ public class RestSuperHero {
     public ResponseEntity<List<SuperHero>> searchHero(@RequestParam String heroName){
         return ResponseEntity.ok(iServiceSuperHero.contieneName(heroName));
     }
+
+    @PutMapping("/update")
+    public ResponseEntity<String> updateHero(@RequestBody SuperHero hero){
+        if(iServiceSuperHero.getHero(hero.getIdSuperHero()).isPresent()){
+            iServiceSuperHero.updateHero(hero);
+            return ResponseEntity.ok("Heroe actualizado correctamente");
+        }else return new ResponseEntity<>("No existe heroe con la id : "+hero.getIdSuperHero(),HttpStatus.NOT_FOUND);
+    }
 }
