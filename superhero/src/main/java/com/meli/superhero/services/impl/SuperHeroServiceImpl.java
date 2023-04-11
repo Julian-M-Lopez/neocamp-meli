@@ -12,8 +12,12 @@ import java.util.Optional;
 @Service
 public class SuperHeroServiceImpl implements ISuperHeroService {
 
+    private final SuperHeroRepository superHeroRepository;
+
     @Autowired
-    private SuperHeroRepository superHeroRepository;
+    public SuperHeroServiceImpl(final SuperHeroRepository superHeroRepository) {
+        this.superHeroRepository = superHeroRepository;
+    }
 
     @Override
     public SuperHero addHero(SuperHero superHero) {
@@ -38,5 +42,10 @@ public class SuperHeroServiceImpl implements ISuperHeroService {
     @Override
     public void deleteHero(int idHero) {
         superHeroRepository.deleteById(idHero);
+    }
+
+    @Override
+    public List<SuperHero> contieneName(String name) {
+        return (List<SuperHero>) listHeros().stream().filter(hero -> hero.getNombre().contains(name));
     }
 }

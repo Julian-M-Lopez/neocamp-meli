@@ -17,4 +17,6 @@ public interface ISuperHeroService {
     Optional<SuperHero> getHero(int idHero);
 
     void deleteHero(int idHero);
+
+    List<SuperHero> contieneName(String name);
 }
