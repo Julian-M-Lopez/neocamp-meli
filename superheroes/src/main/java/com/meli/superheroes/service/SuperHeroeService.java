@@ -48,7 +48,12 @@ public class SuperHeroeService {
     }
 
 
+    public List<SuperHeroe> buscarSuperHeroesPorNombre(String nombre) {
+        // Puedes usar el método findByNombreContainingIgnoreCase() del repositorio
+        // para buscar superhéroes por nombre que contengan el valor proporcionado,
+        // ignorando mayúsculas y minúsculas.
 
 
-
+        return superHeroeRepository.findByNombreContainingIgnoreCase(nombre);
+    }
 }
