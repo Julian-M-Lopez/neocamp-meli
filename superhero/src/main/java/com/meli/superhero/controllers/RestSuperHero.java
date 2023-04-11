@@ -22,9 +22,9 @@ public class RestSuperHero {
         this.iServiceSuperHero = iServiceSuperHero;
     }
 
-    @PostMapping("/")
+    @PostMapping
     public ResponseEntity<SuperHero> addHero(@RequestBody SuperHero superHero){
-        //return ResponseEntity.ok(iServiceSuperHero.addHero(superHero));
+        iServiceSuperHero.addHero(superHero);
         return new ResponseEntity<>(superHero, HttpStatus.CREATED);
     }
 
