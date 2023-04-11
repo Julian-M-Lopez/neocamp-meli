@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
-@Controller
+@RestController
 @RequestMapping("/superhero")
 public class HeroController {
 

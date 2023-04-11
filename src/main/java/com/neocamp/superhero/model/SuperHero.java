@@ -1,10 +1,11 @@
 package com.neocamp.superhero.model;
 
-import jakarta.persistence.*;
+//import jakarta.persistence.*;
 import lombok.Data;
 import org.springframework.stereotype.Repository;
 
 import javax.naming.Name;
+import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
