@@ -60,5 +60,4 @@ public class SuperHeroe {
     public void setCapa(Boolean capa) {
         this.capa = capa;
     }
-}
-*/
+  */
