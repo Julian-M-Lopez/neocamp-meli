@@ -5,10 +5,8 @@ import com.meli.superheroes.repository.SuperHeroeRepository;
 import com.meli.superheroes.service.SuperHeroeService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.crossstore.ChangeSetPersister;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -17,13 +15,15 @@ import java.util.List;
 @AllArgsConstructor
 public class SuperHeroeController {
 
-    private final SuperHeroeService superHeroeService;;
+    private final SuperHeroeService superHeroeService;
+    ;
 
     @GetMapping
     public List<SuperHeroe> obtenerSuperHeroes() {
 
         return superHeroeService.getAllSuperHeroes();
     }
+
     // Buscar superheroe por nombre
     @GetMapping("/{nombre:[a-zA-Z]+}")
     public String obtenerSuperHeroe(@PathVariable("nombre") String nombre) {
@@ -34,11 +34,12 @@ public class SuperHeroeController {
             return "No se encontró el superhéroe " + nombre;
         }
     }
+
     // Buscar superheroe por Id
     @GetMapping("/{id:\\d+}")
-    public String obtenerSuperHeroePorId(@PathVariable("id") Long id){
+    public String obtenerSuperHeroePorId(@PathVariable("id") Long id) {
         SuperHeroe superHeroe = superHeroeService.getSuperHeroeById(id);
-        if (superHeroe != null){
+        if (superHeroe != null) {
             return "El superhéroe " + superHeroe.getNombre() + " es " + superHeroe.getDescripcion();
         } else {
             return "No se encotró el superhéroe con ID: " + id;
@@ -53,11 +54,37 @@ public class SuperHeroeController {
             throw new IllegalArgumentException("El nombre debe tener al menos 3 caracteres.");
         }
         List<SuperHeroe> superHeroes = superHeroeService.buscarSuperHeroesPorNombre(nombre);
-        if (!superHeroes.isEmpty()) {
-            return superHeroes;
-        } else {
-            return superHeroes;
-        }
+        return superHeroes;
     }
+
+
+    //Modificar un súper héroe
+    @PutMapping("/{id}")
+    public ResponseEntity<SuperHeroe> actualizarSuperHeroe(
+            @PathVariable("id") Long id,
+            @RequestBody SuperHeroe superHeroeActualizado) {
+
+        SuperHeroe superHeroeExistente = superHeroeService.getSuperHeroeById(id);
+
+        if (superHeroeExistente == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        superHeroeExistente = superHeroeService.actualizarSuperHeroe(id, superHeroeActualizado);
+
+        return ResponseEntity.ok(superHeroeExistente);
+    }
+
+    //Eliminar un súper héroe
+
+    //Endpoint para eliminar un superhéroe por ID
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteSuperHeroe(@PathVariable Long id) {
+        superHeroeService.deleteSuperHeroe(id);
+        return ResponseEntity.noContent().build();
+    }
+
+
+
 
 }
