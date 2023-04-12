@@ -3,18 +3,16 @@ package com.neocamp.superhero.controller;
 import com.neocamp.superhero.exception.FieldHeroEmptyException;
 import com.neocamp.superhero.exception.ModelNotFoundException;
 import com.neocamp.superhero.model.SuperHero;
-import com.neocamp.superhero.repository.IHeroRepository;
 import com.neocamp.superhero.service.IHeroService;
-import com.neocamp.superhero.service.impl.HeroService;
+import lombok.Builder;
+import lombok.Value;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.bind.DefaultValue;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 @RestController
@@ -27,7 +25,8 @@ public class HeroController {
 
     @PostMapping("/add")
     public ResponseEntity<SuperHero> addHero(@RequestBody SuperHero hero){
-        return  ResponseEntity.ok(iservice.addHero(hero));
+        hero.setName(hero.getName().toLowerCase());
+        return new ResponseEntity<>(iservice.addHero(hero),HttpStatus.CREATED);
     }
 
     @GetMapping("/{idHero}")
@@ -37,18 +36,17 @@ public class HeroController {
             throw new ModelNotFoundException("el heroe no fue encontrado");
         }
         return ResponseEntity.ok(hero.get());
-
     }
-    @GetMapping("/name/{name}")
-    public ResponseEntity<List<SuperHero>>getNameHero(@PathVariable("name") String name){
-
-        if(name.isBlank()){
+    @GetMapping(value = "/name/{ nameHero} ")
+    public ResponseEntity<List<SuperHero>>getNameHero(@PathVariable(value = " nameHero") String name){
+        if(name.isBlank() || name == null){
             throw new FieldHeroEmptyException("campo nombre heroe vacio");
         }
-        return ResponseEntity.ok(iservice.getNameHero(name));
+        return ResponseEntity.ok(iservice.getNameHero(name.toLowerCase()));
     }
 
     @GetMapping("/all")
+    @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<List<SuperHero>> getAllHero (){
         List<SuperHero> hero =iservice.listHeros();
         if(hero.isEmpty()){
@@ -64,13 +62,13 @@ public class HeroController {
             throw new ModelNotFoundException("el id no fue encontrado");
         }
         iservice.deleteHero(idHero);
-        return  ResponseEntity.ok(Boolean.TRUE);
+        return  ResponseEntity.noContent().build();
     }
 
     @PutMapping("/update/{idHero}")
     public ResponseEntity<Object> updateHero(@RequestBody SuperHero hero,@PathVariable("idHero") Long idHero){
         iservice.updateHero(hero,idHero);
-        return ResponseEntity.ok(Boolean.TRUE);
+        return ResponseEntity.noContent().build();
     }
 
 }

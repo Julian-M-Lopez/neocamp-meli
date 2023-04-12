@@ -1,7 +1,7 @@
 DROP TABLE IF EXISTS SUPERHERO;
 
 CREATE TABLE SUPERHERO (
-   id INT AUTO_INCREMENT PRIMARY KEY,
+   id LONG AUTO_INCREMENT PRIMARY KEY,
    name VARCHAR(150) UNIQUE NOT NULL,
    description VARCHAR(150) NOT NULL,
    capa BOOLEAN NOT NULL,
@@ -10,8 +10,9 @@ CREATE TABLE SUPERHERO (
 );
 
 INSERT INTO SUPERHERO (name, description,capa,city) VALUES
-  ('Spiderman', ' araña', false, 'new york'),
-  ('Superman', ' es fuerte ', true, 'new york'),
+  ('spiderman', ' araña', false, 'new york'),
+  ('superman', ' es fuerte ', true, 'new york'),
   ('lintena verde', ' es verde ', true, 'los angeles'),
   ('mujer mariavilla', ' es mujer ', true, 'los angeles');
+
 
