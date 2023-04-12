@@ -72,7 +72,11 @@ public class SuperHeroeService {
                 superHeroeExistente.setDescripcion(superHeroeActualizado.getDescripcion());
             }
 
-            // Guardar el superhéroe actualizado en la base de datos
+            if (superHeroeActualizado.isCapa()!= superHeroeExistente.isCapa()) {
+                superHeroeExistente.setCapa(superHeroeActualizado.isCapa());
+            }
+
+            //Guardar el superhéroe actualizado en la base de datos
             superHeroeExistente = superHeroeRepository.save(superHeroeExistente);
         }
 
