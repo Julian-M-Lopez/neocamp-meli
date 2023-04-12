@@ -36,7 +36,10 @@ public class SuperHeroeService {
     }
 
     public void deleteSuperHeroe(Long id) {
-        superHeroeRepository.deleteById(id);
+        SuperHeroe superHeroeExistente = superHeroeRepository.findById(id).orElse(null);
+        if (superHeroeExistente != null) {
+            superHeroeRepository.deleteById(id);
+        }
     }
 
     @PostConstruct
@@ -55,5 +58,25 @@ public class SuperHeroeService {
 
 
         return superHeroeRepository.findByNombreContainingIgnoreCase(nombre);
+    }
+
+    public SuperHeroe actualizarSuperHeroe(Long id, SuperHeroe superHeroeActualizado) {
+        // Buscar el superhéroe existente por ID
+        SuperHeroe superHeroeExistente = superHeroeRepository.findById(id).orElse(null);
+
+        if (superHeroeExistente != null && superHeroeActualizado != null) {
+            if (superHeroeActualizado.getNombre() != null) {
+                superHeroeExistente.setNombre(superHeroeActualizado.getNombre());
+            }
+            if (superHeroeActualizado.getDescripcion() != null) {
+                superHeroeExistente.setDescripcion(superHeroeActualizado.getDescripcion());
+            }
+
+            // Guardar el superhéroe actualizado en la base de datos
+            superHeroeExistente = superHeroeRepository.save(superHeroeExistente);
+        }
+
+        // Devolver el superhéroe existente (actualizado) en la respuesta
+        return superHeroeExistente;
     }
 }
