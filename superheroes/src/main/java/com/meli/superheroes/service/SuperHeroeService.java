@@ -32,8 +32,14 @@ public class SuperHeroeService {
     }
 
     public SuperHeroe saveSuperHeroe(SuperHeroe superHeroe) {
+        // Verificar si el superhéroe ya existe en la base de datos
+        if (superHeroe.getId() != null && superHeroeRepository.existsById(superHeroe.getId())) {
+            throw new IllegalArgumentException("El superhéroe ya existe en la base de datos");
+        }
+
         return superHeroeRepository.save(superHeroe);
     }
+
 
     public void deleteSuperHeroe(Long id) {
         SuperHeroe superHeroeExistente = superHeroeRepository.findById(id).orElse(null);
