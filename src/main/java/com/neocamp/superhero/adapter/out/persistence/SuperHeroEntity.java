@@ -1,17 +1,15 @@
-package com.neocamp.superhero.model;
+package com.neocamp.superhero.adapter.out.persistence;
 
-//import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Data;
-import org.springframework.stereotype.Repository;
 
-import javax.naming.Name;
 import javax.persistence.*;
-import java.util.Objects;
 
 @Entity
 @Data
+@Builder
 @Table(name = "SUPERHERO")
-public class SuperHero {
+public class SuperHeroEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,8 +22,5 @@ public class SuperHero {
     private boolean capa;
 
     private String city;
-
-
-
 
 }

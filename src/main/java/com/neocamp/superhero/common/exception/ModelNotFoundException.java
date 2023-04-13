@@ -1,4 +1,4 @@
-package com.neocamp.superhero.exception;
+package com.neocamp.superhero.common.exception;
 
 
 import org.springframework.http.HttpStatus;
