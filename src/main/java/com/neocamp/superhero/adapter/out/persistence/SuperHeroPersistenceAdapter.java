@@ -9,8 +9,9 @@ public class SuperHeroPersistenceAdapter implements SuperHeroPortOut {
     public SuperHeroPersistenceAdapter(SuperHeroRepository superHeroRepository) {
         this.superHeroRepository = superHeroRepository;
     }
+
     @Override
-    public SuperHero addHero(SuperHero superHero) {
+    public SuperHero persistSuperHero(SuperHero superHero) {
         return SuperHeroMapper.entityToDomain(superHeroRepository
                 .save(SuperHeroMapper.domainToEntity(superHero)));
     }

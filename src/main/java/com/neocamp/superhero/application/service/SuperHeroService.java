@@ -8,9 +8,15 @@ import org.springframework.stereotype.Service;
 @Service
 public class SuperHeroService implements SuperHeroPortIn {
 
+    private final SuperHeroPortOut superHeroPortOut;
+
+    public SuperHeroService(SuperHeroPortOut superHeroPortOut) {
+        this.superHeroPortOut = superHeroPortOut;
+    }
+
     @Override
     public SuperHero addSuperHero(SuperHero superHero) {
-        return null;
+        return superHeroPortOut.persistSuperHero(superHero);
     }
 
 //    @Override
