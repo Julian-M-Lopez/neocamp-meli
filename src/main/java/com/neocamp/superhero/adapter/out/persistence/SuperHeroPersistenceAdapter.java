@@ -1,8 +1,9 @@
 package com.neocamp.superhero.adapter.out.persistence;
 
 import com.neocamp.superhero.application.port.out.SuperHeroPortOut;
+import com.neocamp.superhero.common.common.PersistenceAdapter;
 import com.neocamp.superhero.domain.SuperHero;
-
+@PersistenceAdapter
 public class SuperHeroPersistenceAdapter implements SuperHeroPortOut {
     private final SuperHeroRepository superHeroRepository;
 

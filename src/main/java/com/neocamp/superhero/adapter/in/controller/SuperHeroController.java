@@ -1,17 +1,16 @@
 package com.neocamp.superhero.adapter.in.controller;
 
 import com.neocamp.superhero.application.port.in.SuperHeroPortIn;
+import com.neocamp.superhero.common.common.WebAdapter;
 import com.neocamp.superhero.domain.SuperHero;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+@WebAdapter
 @RestController
 @RequestMapping("/superhero")
 public class SuperHeroController {
-
-//    @Autowired
-//     private IHeroService iservice;
 
     private final SuperHeroPortIn superHeroPortIn;
 

@@ -2,10 +2,11 @@ package com.neocamp.superhero.application.service;
 
 import com.neocamp.superhero.application.port.in.SuperHeroPortIn;
 import com.neocamp.superhero.application.port.out.SuperHeroPortOut;
+import com.neocamp.superhero.common.common.UseCase;
 import com.neocamp.superhero.domain.SuperHero;
 import org.springframework.stereotype.Service;
 
-@Service
+@UseCase
 public class SuperHeroService implements SuperHeroPortIn {
 
     private final SuperHeroPortOut superHeroPortOut;
