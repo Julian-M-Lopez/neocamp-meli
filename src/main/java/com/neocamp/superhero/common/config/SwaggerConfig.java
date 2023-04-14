@@ -1,4 +1,4 @@
-package com.neocamp.superhero.common.exception.config;
+package com.neocamp.superhero.common.config;
 
 import java.util.Collections;
 import org.springframework.context.annotation.Bean;
