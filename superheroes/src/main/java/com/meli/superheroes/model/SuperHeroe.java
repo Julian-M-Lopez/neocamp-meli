@@ -4,14 +4,14 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 public class SuperHeroe {
     // Atributos
     @Id
@@ -22,42 +22,3 @@ public class SuperHeroe {
     private boolean capa = false;
 }
 
-    //Codigo omitiod por Lombok
- /*
-    // Metodos constructor
-    public SuperHeroe(String nombre, String descripcion) {
-        this.nombre = nombre;
-        this.descripcion = descripcion;
-    }
-
-    // Metodos personalizados
-    @Override
-    public String toString() {
-        return "(Nombre): " + nombre + ", Descripcion: " + descripcion + ", Capa: " + capa;
-    }
-
-    // Metodos getter y setters
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    public boolean getCapa() {
-        return capa;
-    }
-
-    public void setCapa(Boolean capa) {
-        this.capa = capa;
-    }
-  */
