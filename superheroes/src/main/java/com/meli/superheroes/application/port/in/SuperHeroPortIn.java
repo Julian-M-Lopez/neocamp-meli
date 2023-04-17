@@ -10,4 +10,10 @@ public interface SuperHeroPortIn {
    List<SuperHero> getAllSuperHeroes();
 
    SuperHero getSuperHeroById(Long id);
+
+    List<SuperHero> findHeroByName(String name);
+
+    void deleteSuperHero(Long id);
+
+    SuperHero updateSuperHero(Long id, SuperHero superHeroeActualizado);
 }

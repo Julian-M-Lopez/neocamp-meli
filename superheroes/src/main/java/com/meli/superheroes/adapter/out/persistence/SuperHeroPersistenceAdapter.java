@@ -2,21 +2,16 @@ package com.meli.superheroes.adapter.out.persistence;
 
 
 import com.meli.superheroes.application.port.out.SuperHeroPortOut;
+import com.meli.superheroes.common.common.PersistenceAdapter;
 import com.meli.superheroes.domain.model.SuperHero;
-import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
 import java.util.List;
 
-@Component
+@PersistenceAdapter
 public class SuperHeroPersistenceAdapter implements SuperHeroPortOut {
 
-    @Autowired
-    private SuperHeroRepository superHeroRepository;
+    private final SuperHeroRepository superHeroRepository;
 
-    @Autowired
-    private SuperHeroMapper superHeroMapper;
 
     @Autowired
     public SuperHeroPersistenceAdapter(SuperHeroRepository superHeroRepository) {
@@ -25,19 +20,45 @@ public class SuperHeroPersistenceAdapter implements SuperHeroPortOut {
 
     @Override
     public SuperHero saveSuperHero(SuperHero superHero) {
-        SuperHeroEntity superHeroEntity = superHeroMapper.domainToEntity(superHero);
+        SuperHeroEntity superHeroEntity = SuperHeroMapper.domainToEntity(superHero);
         superHeroRepository.save(superHeroEntity);
         return getSuperHeroById(superHeroEntity.getId());
     }
 
     @Override
-    public void updateSuperHero(SuperHero superHero) {
-        //  lógica de actualización en el repositorio
+    public SuperHero updateSuperHero(Long id, SuperHero superHeroeActualizado) {
+        // lógica de actualización en el repositorio
+
+        SuperHeroEntity superHeroeExistente = superHeroRepository.findById(id).orElse(null);
+
+        if (superHeroeExistente != null && superHeroeActualizado != null) {
+            if (superHeroeActualizado.getName() != null) {
+                superHeroeExistente.setName(superHeroeActualizado.getName());
+            }
+            if (superHeroeActualizado.getDescription() != null) {
+                superHeroeExistente.setDescription(superHeroeActualizado.getDescription());
+            }
+
+            if (superHeroeActualizado.isCapa()!= superHeroeExistente.isCapa()) {
+                superHeroeExistente.setCapa(superHeroeActualizado.isCapa());
+            }
+
+            // Guardar el superhéroe actualizado en el repositorio
+            superHeroeExistente = superHeroRepository.save(superHeroeExistente);
+        }
+
+        // Devolver el superhéroe existente (actualizado) en la respuesta
+        return SuperHeroMapper.entityToDomain(superHeroeExistente);
     }
+
 
     @Override
     public void deleteSuperHero(Long superHeroId) {
         // lógica de eliminación en el repositorio
+        SuperHeroEntity superHeroEntity = superHeroRepository.findById(superHeroId).orElse(null);
+        if (superHeroEntity != null) {
+            superHeroRepository.deleteById(superHeroId);
+        }
     }
 
     @Override
@@ -50,7 +71,7 @@ public class SuperHeroPersistenceAdapter implements SuperHeroPortOut {
     @Override
     public List<SuperHero> getSuperHeroesByName(String name) {
         // lógica de obtención en el repositorio y retorna los resultados mapeados a entidades de dominio
-        List<SuperHeroEntity> superHeroEntities = superHeroRepository.findByName(name);
+        List<SuperHeroEntity> superHeroEntities = superHeroRepository.findByNameContainingIgnoreCase(name);
         return SuperHeroMapper.entitiesToDomains(superHeroEntities);
     }
 
@@ -60,28 +81,5 @@ public class SuperHeroPersistenceAdapter implements SuperHeroPortOut {
         // Mapear las entidades a objetos de dominio y retornar la lista
         return SuperHeroMapper.entitiesToDomains(superHeroEntities);
     }
-
-    @PostConstruct
-    public void cargarSuperheroes() {
-        // Cargar los datos de los superhéroes en la base de datos H2
-        SuperHero superHero1 = SuperHero.builder()
-                .id(null)
-                .name("Superman")
-                .description("Man of Steel")
-                .capa(true)
-                .build();
-        SuperHero superHero2 = SuperHero.builder()
-                .id(null)
-                .name("Spiderman")
-                .description("Friendly Neighborhood Spider-Man")
-                .capa(false)
-                .build();
-        // Persistir los superhéroes en la base de datos
-        superHeroRepository.save(SuperHeroMapper.domainToEntity(superHero1));
-        superHeroRepository.save(SuperHeroMapper.domainToEntity(superHero2));
-    }
-
-
-
 }
 

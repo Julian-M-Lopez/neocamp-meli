@@ -1,12 +1,10 @@
 package com.meli.superheroes.adapter.out.persistence;
 
 import com.meli.superheroes.domain.model.SuperHero;
-import org.springframework.stereotype.Component;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Component
+
 public class SuperHeroMapper {
 
     public static SuperHero entityToDomain(SuperHeroEntity superHeroEntity) {

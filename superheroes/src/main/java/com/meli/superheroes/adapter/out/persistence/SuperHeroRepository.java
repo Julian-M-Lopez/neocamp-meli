@@ -7,5 +7,5 @@ import java.util.List;
 
 @Repository
 public interface SuperHeroRepository extends JpaRepository<SuperHeroEntity, Long> {
-    List<SuperHeroEntity> findByName(String name);
+    List<SuperHeroEntity> findByNameContainingIgnoreCase(String name);
 }
