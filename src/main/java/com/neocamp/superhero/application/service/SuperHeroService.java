@@ -3,8 +3,12 @@ package com.neocamp.superhero.application.service;
 import com.neocamp.superhero.application.port.in.SuperHeroPortIn;
 import com.neocamp.superhero.application.port.out.SuperHeroPortOut;
 import com.neocamp.superhero.common.common.UseCase;
+import com.neocamp.superhero.common.exception.ModelNotFoundException;
 import com.neocamp.superhero.domain.SuperHero;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
 
 @UseCase
 public class SuperHeroService implements SuperHeroPortIn {
@@ -19,6 +23,49 @@ public class SuperHeroService implements SuperHeroPortIn {
     public SuperHero addSuperHero(SuperHero superHero) {
         return superHeroPortOut.persistSuperHero(superHero);
     }
+
+    @Override
+    public SuperHero getSuperHero(Long idSuperHero) {
+        Optional<SuperHero> superHero = superHeroPortOut.getSuperHero(idSuperHero);
+        if (superHero.isEmpty()){
+            throw new ModelNotFoundException("no encontrado");
+        }
+        return superHero.get() ;
+    }
+
+    @Override
+    public SuperHero getSuperHeroForName(String name) {
+        Optional<SuperHero> superHero = superHeroPortOut.getSuperHeroForName(name);
+        if(superHero.isEmpty()){
+            throw new ModelNotFoundException("no encontrado");
+        }
+        return superHero.get();
+    }
+
+    @Override
+    public List<SuperHero> getAllSuperHero() {
+        List<SuperHero> superHeroes = superHeroPortOut.getAllSuperHero();
+
+        return superHeroes;
+    }
+
+    @Override
+    public void deleteSuperHero(Long idSuperHero) {
+        Optional<SuperHero> superHero = superHeroPortOut.getSuperHero(idSuperHero);
+        superHeroPortOut.deleteSuperhero(idSuperHero);
+    }
+
+    @Override
+    public SuperHero editSuperHero(SuperHero superHero, Long idSuperHero) {
+        Optional<SuperHero> superHero1 =superHeroPortOut.getSuperHero(idSuperHero);
+        SuperHero heroe = superHero1.get();
+        heroe.setName(superHero.getName());
+        heroe.setDescription(superHero.getDescription());
+        heroe.setCapa(superHero.isCapa());
+        heroe.setCity(superHero.getCity());
+        return superHeroPortOut.persistSuperHero(heroe);
+    }
+
 
 //    @Override
 //    public SuperHeroEntity addHero(SuperHeroEntity Hero) {
