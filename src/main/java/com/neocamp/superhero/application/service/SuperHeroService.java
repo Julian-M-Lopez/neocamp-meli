@@ -28,7 +28,7 @@ public class SuperHeroService implements SuperHeroPortIn {
     public SuperHero getSuperHero(Long idSuperHero) {
         Optional<SuperHero> superHero = superHeroPortOut.getSuperHero(idSuperHero);
         if (superHero.isEmpty()){
-            throw new ModelNotFoundException("no encontrado");
+            throw new ModelNotFoundException("No se a encontrado el supuer heroe");
         }
         return superHero.get() ;
     }
@@ -37,7 +37,7 @@ public class SuperHeroService implements SuperHeroPortIn {
     public SuperHero getSuperHeroForName(String name) {
         Optional<SuperHero> superHero = superHeroPortOut.getSuperHeroForName(name);
         if(superHero.isEmpty()){
-            throw new ModelNotFoundException("no encontrado");
+            throw new ModelNotFoundException("no se a encontrado un heroe con este nombre");
         }
         return superHero.get();
     }
@@ -45,25 +45,27 @@ public class SuperHeroService implements SuperHeroPortIn {
     @Override
     public List<SuperHero> getAllSuperHero() {
         List<SuperHero> superHeroes = superHeroPortOut.getAllSuperHero();
+        if (superHeroes.isEmpty()){
+            throw new ModelNotFoundException("No hay heroes resgistrados");
+        }
 
         return superHeroes;
     }
 
     @Override
     public void deleteSuperHero(Long idSuperHero) {
-        Optional<SuperHero> superHero = superHeroPortOut.getSuperHero(idSuperHero);
+        this.getSuperHero(idSuperHero);
         superHeroPortOut.deleteSuperhero(idSuperHero);
     }
 
     @Override
     public SuperHero editSuperHero(SuperHero superHero, Long idSuperHero) {
-        Optional<SuperHero> superHero1 =superHeroPortOut.getSuperHero(idSuperHero);
-        SuperHero heroe = superHero1.get();
+        SuperHero heroe = this.getSuperHero(idSuperHero);
         heroe.setName(superHero.getName());
         heroe.setDescription(superHero.getDescription());
         heroe.setCapa(superHero.isCapa());
         heroe.setCity(superHero.getCity());
-        return superHeroPortOut.persistSuperHero(heroe);
+        return this.addSuperHero(heroe);
     }
 
 
